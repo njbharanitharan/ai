@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f3f1ea;
+  --panel: #ffffff;
+  --ink: #1d1a17;
+  --muted: #5b544d;
+  --accent: #c46b1a;
+  --accent-2: #2f4f4f;
+  --glass: rgba(255, 255, 255, 0.82);
+  --shadow: 0 24px 60px rgba(23, 18, 13, 0.18);
+  --radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top, #fbf7ef 0%, #efe7db 52%, #e5dccf 100%);
+  position: relative;
+}
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(196, 107, 26, 0.2), transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(47, 79, 79, 0.2), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(84, 120, 92, 0.15), transparent 50%);
+  z-index: -1;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.1fr) minmax(260px, 0.9fr);
+  gap: 32px;
+  padding: 64px clamp(20px, 8vw, 96px) 40px;
+  align-items: center;
+}
+
+.hero-inner h1 {
+  font-family: "Fraunces", "Georgia", serif;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  margin: 0 0 16px;
+}
+
+.eyebrow {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--accent-2);
+  margin-bottom: 12px;
+}
+
+.subhead {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 540px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 14px 30px rgba(196, 107, 26, 0.3);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(29, 26, 23, 0.2);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero-card {
+  background: var(--glass);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.card-label {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-2);
+  margin-bottom: 12px;
+}
+
+.card-body h3 {
+  font-family: "Fraunces", "Georgia", serif;
+  margin: 0 0 8px;
+}
+
+.quick-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 8px;
+}
+
+.quick-list li {
+  background: rgba(47, 79, 79, 0.08);
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(280px, 1.2fr);
+  gap: 28px;
+  padding: 0 clamp(20px, 8vw, 96px) 64px;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+}
+
+.panel-subtitle {
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.filter-bar {
+  margin-bottom: 16px;
+}
+
+.filter-bar input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 26, 23, 0.2);
+  background: #faf8f5;
+  font-family: inherit;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.field span {
+  color: var(--muted);
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 26, 23, 0.2);
+  font-family: inherit;
+  background: #faf8f5;
+}
+
+.field.hidden {
+  display: none;
+}
+
+.inline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.check-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.check-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field.wide {
+  grid-column: 1 / -1;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.output-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.output-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.protocol {
+  background: #f7f2ea;
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 360px;
+  overflow-y: auto;
+  border: 1px solid rgba(29, 26, 23, 0.08);
+}
+
+.protocol h3 {
+  font-family: "Fraunces", "Georgia", serif;
+  margin-top: 0;
+}
+
+.protocol .section-title {
+  font-weight: 600;
+  color: var(--accent-2);
+  margin: 16px 0 6px;
+}
+
+.protocol .alert {
+  background: rgba(196, 107, 26, 0.12);
+  border-left: 4px solid var(--accent);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin: 12px 0;
+  font-size: 0.95rem;
+}
+
+
+.protocol ul {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 6px 0 12px;
+}
+
+.placeholder {
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 16px 40px;
+  color: var(--muted);
+}
+
+.wiki-panel {
+  margin: 0 clamp(20px, 8vw, 96px) 64px;
+  display: grid;
+  gap: 16px;
+}
+
+.wiki-summary {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(180px, 240px);
+  gap: 16px;
+  background: #f7f2ea;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(29, 26, 23, 0.08);
+  align-items: center;
+}
+
+.wiki-summary-image img {
+  width: 100%;
+  border-radius: 12px;
+  display: none;
+}
+
+.wiki-summary-text p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.wiki-inputs input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(29, 26, 23, 0.2);
+  background: #faf8f5;
+  font-family: inherit;
+}
+
+.wiki-results {
+  background: #f7f2ea;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(29, 26, 23, 0.08);
+  min-height: 140px;
+}
+
+.wiki-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(29, 26, 23, 0.08);
+}
+
+.wiki-item:last-child {
+  border-bottom: none;
+}
+
+.wiki-item a {
+  color: var(--accent-2);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wiki-title {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-bottom: 24px;
+  }
+}

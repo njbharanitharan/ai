@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plant Tissue Culture Protocols Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient"></div>
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Academic Protocol Studio</p>
+        <h1>AI Protocols Generator for Plant Tissue Culture</h1>
+        <p class="subhead">
+          Build rigorous, step-by-step tissue culture protocols across 1,000 species with a
+          focus on budget and scale constraints.
+        </p>
+        <div class="hero-actions">
+          <button class="btn primary" id="generateBtn">Generate Protocol</button>
+          <button class="btn ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="card-label">Protocol Preview</div>
+        <div class="card-body" id="previewCard">
+          <h3>Ready when you are</h3>
+          <p>Select a species, choose constraints, and generate a protocol tailored to your lab.</p>
+          <ul class="quick-list">
+            <li>Academic tone</li>
+            <li>1,000 species suggestions</li>
+            <li>Step-by-step workflow</li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Inputs</h2>
+        <p class="panel-subtitle">Fine-tune your protocol using the controls below.</p>
+
+        <div class="filter-bar">
+          <input id="paramSearch" type="text" placeholder="Search parameters (e.g., media, sterilization)" />
+        </div>
+
+        <div class="grid">
+          <label class="field" data-field="species">
+            <span>Species</span>
+            <input id="speciesInput" list="speciesList" type="text" placeholder="Type any plant species name" />
+            <datalist id="speciesList"></datalist>
+          </label>
+
+          <label class="field" data-field="variant">
+            <span>Protocol Variant</span>
+            <select id="variant">
+              <option value="auto" selected>Auto (species-based)</option>
+              <option value="microprop">Micropropagation</option>
+              <option value="callus">Callus induction</option>
+              <option value="embryogenesis">Somatic embryogenesis</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="explant">
+            <span>Explant Type</span>
+            <select id="explant">
+              <option value="auto" selected>Auto (species-based)</option>
+              <option value="shoot_tip">Shoot tip</option>
+              <option value="nodal">Nodal segment</option>
+              <option value="leaf">Leaf disc</option>
+              <option value="hypocotyl">Hypocotyl</option>
+              <option value="embryo">Immature embryo</option>
+              <option value="meristem">Meristem</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="medium">
+            <span>Basal Medium</span>
+            <select id="medium">
+              <option value="auto" selected>Auto (species-based)</option>
+              <option value="ms">MS (Murashige & Skoog)</option>
+              <option value="b5">Gamborg B5</option>
+              <option value="wpm">Woody Plant Medium</option>
+              <option value="nn">Nitsch & Nitsch</option>
+              <option value="custom">Custom (note below)</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="pgr">
+            <span>Growth Regulator Strategy</span>
+            <select id="pgr">
+              <option value="auto" selected>Auto (species-based)</option>
+              <option value="balanced">Balanced shoot/root (low-cost)</option>
+              <option value="shoot">Shoot induction priority</option>
+              <option value="root">Rooting priority</option>
+              <option value="none">No PGRs (constraint)</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="sterilization">
+            <span>Sterilization Setup</span>
+            <select id="sterilization">
+              <option value="laminar">Laminar flow + standard sterilants</option>
+              <option value="budget">No laminar flow (budget protocol)</option>
+              <option value="minimal">Minimal sterilants available</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="contamination">
+            <span>Contamination Risk</span>
+            <select id="contamination">
+              <option value="low">Low (greenhouse stock)</option>
+              <option value="medium">Medium (field stock)</option>
+              <option value="high">High (unknown hygiene)</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="scale">
+            <span>Target Scale</span>
+            <select id="scale">
+              <option value="pilot">Pilot (20-50 explants)</option>
+              <option value="batch">Batch (100-250 explants)</option>
+              <option value="production">Production (500+ explants)</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="conditions">
+            <span>Culture Conditions</span>
+            <select id="conditions">
+              <option value="standard">25±2°C, 16/8 h photoperiod</option>
+              <option value="cool">22±2°C, 16/8 h photoperiod</option>
+              <option value="warm">27±2°C, 16/8 h photoperiod</option>
+              <option value="dark">25±2°C, dark for 7 days</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="subculture">
+            <span>Subculture Interval</span>
+            <select id="subculture">
+              <option value="4">Every 4 weeks</option>
+              <option value="6">Every 6 weeks</option>
+              <option value="8">Every 8 weeks</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="budget">
+            <span>Budget Focus</span>
+            <select id="budget">
+              <option value="strict">Strict</option>
+              <option value="balanced">Balanced</option>
+              <option value="flexible">Flexible</option>
+            </select>
+          </label>
+
+          <label class="field" data-field="live">
+            <span>Live Preview</span>
+            <select id="livePreview">
+              <option value="on">On</option>
+              <option value="off">Off</option>
+            </select>
+          </label>
+
+          <label class="field wide" data-field="media">
+            <span>Custom Media Builder</span>
+            <div class="inline-grid">
+              <input id="sucrose" type="number" step="0.5" min="0" max="6" placeholder="Sucrose (%)" />
+              <input id="agar" type="number" step="0.1" min="0" max="1.5" placeholder="Agar (%)" />
+              <input id="ph" type="number" step="0.1" min="4.8" max="6.5" placeholder="pH" />
+            </div>
+            <div class="check-row">
+              <label><input type="checkbox" id="additive_aa" /> Amino acids</label>
+              <label><input type="checkbox" id="additive_cw" /> Coconut water</label>
+              <label><input type="checkbox" id="additive_ac" /> Activated charcoal</label>
+              <label><input type="checkbox" id="additive_vit" /> Vitamins</label>
+            </div>
+          </label>
+
+          <label class="field wide" data-field="qc">
+            <span>Quality Control Checklist</span>
+            <div class="check-row">
+              <label><input type="checkbox" id="qc_identity" /> Identity verified</label>
+              <label><input type="checkbox" id="qc_contam" /> Contamination log</label>
+              <label><input type="checkbox" id="qc_media" /> Media batch recorded</label>
+              <label><input type="checkbox" id="qc_ph" /> pH calibrated</label>
+              <label><input type="checkbox" id="qc_growth" /> Growth metrics captured</label>
+            </div>
+          </label>
+
+          <label class="field wide" data-field="notes">
+            <span>Custom Notes</span>
+            <textarea id="notes" rows="3" placeholder="Add constraints, custom media components, or scale notes."></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel output">
+        <div class="output-head">
+          <h2>Generated Protocol</h2>
+          <div class="output-actions">
+            <button class="btn ghost" id="copyBtn">Copy</button>
+            <button class="btn ghost" id="downloadBtn">Download</button>
+            <button class="btn ghost" id="readBtn">Read Aloud</button>
+          </div>
+        </div>
+        <article id="protocolOutput" class="protocol">
+          <p class="placeholder">Your protocol will appear here after generation.</p>
+        </article>
+      </section>
+    </main>
+
+    <section class="panel wiki-panel">
+      <div class="output-head">
+        <h2>Search Engine</h2>
+        <div class="output-actions">
+          <button class="btn ghost" id="wikiSearchBtn">Search</button>
+          <button class="btn ghost" id="wikiClearBtn">Clear</button>
+          <button class="btn ghost" id="wikiReadBtn">Read Aloud</button>
+        </div>
+      </div>
+      <div class="wiki-inputs">
+        <input id="wikiQuery" type="text" placeholder="Search Wikipedia (e.g., Arabidopsis thaliana)" />
+      </div>
+      <div id="wikiSummary" class="wiki-summary">
+        <div class="wiki-summary-text">
+          <p class="placeholder">Top result summary will appear here.</p>
+        </div>
+        <div class="wiki-summary-image">
+          <img id="wikiImage" alt="Wikipedia thumbnail" />
+        </div>
+      </div>
+      <div id="wikiResults" class="wiki-results">
+        <p class="placeholder">Results will appear here.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Built for academic labs. Use expert judgment, validate locally, and follow biosafety guidelines.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "species": "Solanum tuberosum",
+  "explant": "nodal",
+  "medium": "ms",
+  "pgr": "balanced",
+  "sterilization": "budget",
+  "scale": "batch",
+  "conditions": "standard",
+  "subculture": "4",
+  "budget": "strict",
+  "notes": "Budget-constrained lab with limited access to commercial gelling agents."
+}
